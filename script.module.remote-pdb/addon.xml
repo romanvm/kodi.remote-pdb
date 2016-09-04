@@ -12,7 +12,7 @@
     <description>Allows using Python built-in PDB debugger via telnet connection to debug addons.</description>
     <platform>all</platform>
     <license>BSD</license>
-    <source></source>
-    <website>https://github.com/ionelmc/python-remote-pdb</website>
+    <source>https://github.com/romanvm/kodi.remote-pdb</source>
+    <website>https://docs.python.org/2/library/pdb.html</website>
   </extension>
 </addon>
