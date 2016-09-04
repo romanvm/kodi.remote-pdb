@@ -80,13 +80,13 @@ class RemotePdb(Pdb):
         cry("RemotePdb session open at %s:%s, waiting for connection ..." % (listen_host, listen_port))
         self._dialog = DialogProgressBG()
         self._dialog.create('remote-pdb',
-                      'Waiting for connection at [COLOR=yellow]{host}:{port}[/COLOR]'.format(
-                          host=listen_host,
-                          port=listen_port
-                      ))
+                            'Waiting for connection at [COLOR=yellow]{host}:{port}[/COLOR]'.format(
+                                host=listen_host,
+                                port=listen_port
+                            ))
         self._listen_socket.listen(1)
         self._connection, address = self._listen_socket.accept()
-        self._dialog.update(heading='remote-pdb', message='Accepted connection from {0}'.format(address[0]))
+        self._dialog.update(100, heading='remote-pdb', message='Connection from {0} active'.format(address[0]))
         cry("RemotePdb accepted connection from %s." % repr(address))
         if PY3:
             self.handle = LF2CRLF_FileWrapper(self._connection.makefile('rw'))
