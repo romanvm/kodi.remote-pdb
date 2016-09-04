@@ -12,7 +12,7 @@ Usage
 -----
 
 First you need to install ``script.module.remote-pdb`` addon in your Kodi instance where you want to debug your addon.
-An installable ZIP can be downloaded from "Releases" tab of this repository.
+An installable ZIP can be downloaded from `Releases`_ tab of this repository.
 
 Then include ``script.module.remote-pdb`` in your ``addon.xml`` as a dependency:
 
@@ -64,3 +64,4 @@ BSD license, see ``license.txt``.
 .. _Kodi mediacenter: https://kodi.tv
 .. _PDB: https://docs.python.org/2/library/pdb.html
 .. _PuTTY: http://www.putty.org
+.. _Releases: https://github.com/romanvm/kodi.remote-pdb/releases
