@@ -68,20 +68,22 @@ class RemotePdb(Pdb):
     def __init__(self, host, port, patch_stdstreams=False):
         cry('listen socket')
         self._listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._listen_socket.settimeout(None)
         cry('setsokcport')
         self._listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
         cry('bind')
         self._listen_socket.bind((host, port))
-        self._listen_socket.settimeout(None)
         self._stop_monitor = threading.Event()
         self._monitor_thread = threading.Thread(target=self._monitor_abort)
         self._monitor_thread.daemon = True
         self._monitor_thread.start()
-        host_port = self._listen_socket.getsockname()
-        cry("RemotePdb session open at %s:%s, waiting for connection ..." % host_port)
+        if not host:
+            host = socket.gethostname()
+        port = self._listen_socket.getsockname()[1]
+        cry("RemotePdb session open at %s:%s, waiting for connection ..." % (host, port))
         self._dialog = DialogProgressBG()
         self._dialog.create('remote-pdb',
-                            'Waiting for connection at [COLOR=yellow]%s:%s[/COLOR]' % host_port
+                            'Waiting for connection at [COLOR=yellow]%s:%s[/COLOR]' % (host, port)
                             )
         self._listen_socket.listen(1)
         self._connection, address = self._listen_socket.accept()
