@@ -72,6 +72,7 @@ class RemotePdb(Pdb):
         self._listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
         cry('bind')
         self._listen_socket.bind((host, port))
+        self._listen_socket.settimeout(None)
         self._stop_monitor = threading.Event()
         self._monitor_thread = threading.Thread(target=self._monitor_abort)
         self._monitor_thread.daemon = True
@@ -84,6 +85,7 @@ class RemotePdb(Pdb):
                             )
         self._listen_socket.listen(1)
         self._connection, address = self._listen_socket.accept()
+        self._connection.settimeout(None)
         self._dialog.update(100, heading='remote-pdb', message='Connection from %s active' % address[0])
         cry("RemotePdb accepted connection from %s." % repr(address))
         if PY3:
