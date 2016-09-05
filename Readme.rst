@@ -43,7 +43,7 @@ Note that hostname/IP and port values are separated by a space. The ``port`` val
 specified in ``set_trace`` call.
 This will open the ``PDB`` debug console. Read `PDB`_ documentation to learn how to use the debugger.
 
-Note that after creating a telnet session by the initial ``set_trace`` call
+After creating a telnet session by the initial ``set_trace`` call
 you can use subsequent ``set_trace()`` calls (without arguments) as hardcoded breakpoints
 to enter into the debugger repeatedly within the same telnet session.
 
