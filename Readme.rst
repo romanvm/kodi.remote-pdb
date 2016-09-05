@@ -32,6 +32,13 @@ Put the following line into your addon code:
 This line should be put at the place where you want to start your debugging, usually as early as possible.
 You can change the ``port`` argument but it is better to select values higher than ``1024`` because
 lower port values may be restricted by your OS for security reasons.
+By default ``remote-pdb`` opens connection on ``localhost``. To allow remote connections
+you need to set the ``host`` parameter to an empty string, for example:
+
+.. code-block:: python
+
+  from remote_pdb import set_trace; set_trace(host='', port=5555)
+
 The ``set_trace`` call will pause your plugin and the ``remote-pdb`` debugger will wait for a telnet connection.
 The ``script.module.remote-pdb`` will also display a notification in Kodi that includes a hostname and a port
 to connect to for your information.
