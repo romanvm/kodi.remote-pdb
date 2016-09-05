@@ -29,22 +29,26 @@ Put the following line into your addon code:
 
   from remote_pdb import set_trace; set_trace(port=5555)
 
-This line should be put at the place where you want to start your debugging, preferably as early as possible.
+This line should be put at the place where you want to start your debugging, usually as early as possible.
 You can change the ``port`` argument but it is better to select values higher than ``1024`` because
-lower port values may be restricted by OS for security reasons.
-The ``set_trace`` call will pause your plugin and the ``remote-pdd`` will wait for a telnet connection.
+lower port values may be restricted by your OS for security reasons.
+The ``set_trace`` call will pause your plugin and the ``remote-pdb`` debugger will wait for a telnet connection.
 The ``script.module.remote-pdb`` will also display a notification in Kodi that includes a hostname and a port
-to connect to.
+to connect to for your information.
 Type in the console ``telnet <Kodi hostname or IP-address> <port>``, for example::
 
   $telnet 192.168.1.16 5555
 
-Note that hostname/IP and port values are separated by a space. The ``port`` value must be the one
+Note that hostname/IP and port values are separated by a space. The ``port`` value must be the same as
 specified in ``set_trace`` call.
 This will open the ``PDB`` debug console. Read `PDB`_ documentation to learn how to use the debugger.
 
-When you finish your debugging you can remove ``script.module.remote-pdb`` from dependencies and
-``set_trace`` call(-s) from your code.
+Note that after creating a telnet session by the initial ``set_trace`` call
+you can use subsequent ``set_trace()`` calls (without arguments) as hardcoded breakpoints
+to enter into the debugger repeatedly within the same telnet session.
+
+**Warning**: when you finish your debugging don't forget to remove ``script.module.remote-pdb``
+from addon dependencies and ``set_trace`` call(-s) from your code.
 
 Telnet Client
 -------------
