@@ -63,6 +63,7 @@ class RemotePdb(Pdb):
     Then run: telnet 127.0.0.1 4444
     """
     active_instance = None
+    has_quit = False
 
     def __init__(self, host, port, patch_stdstreams=False):
         cry('listen socket')
@@ -135,6 +136,7 @@ class RemotePdb(Pdb):
         except AttributeError:
             pass
         self.set_quit()
+        RemotePdb.has_quit = True
         return 1
 
     do_q = do_exit = do_quit
@@ -156,7 +158,8 @@ def set_trace(host='127.0.0.1', port=0, patch_stdstreams=False):
     """
     Opens a remote PDB on first available port.
     """
-    rdb = RemotePdb.active_instance
-    if rdb is None:
-        rdb = RemotePdb(host=host, port=port, patch_stdstreams=patch_stdstreams)
-    rdb.set_trace(frame=sys._getframe().f_back)
+    if not RemotePdb.has_quit:
+        rdb = RemotePdb.active_instance
+        if rdb is None:
+            rdb = RemotePdb(host=host, port=port, patch_stdstreams=patch_stdstreams)
+        rdb.set_trace(frame=sys._getframe().f_back)
