@@ -1,6 +1,9 @@
 kodi.remote-pdb
 ===============
 
+**Note**: ``kodi.remote-pdb`` is no longer supported! If you need a remote Python debugger for
+Kodi addons, check my `kodi.web-pdb <https://github.com/romanvm/kodi.web-pdb>`_ project.
+
 ``kodi.remote-pdb`` is a variant of `remote-pdb`_ Python package modified for using in `Kodi mediacenter`_.
 It is a telnet interface for Python's built-in `PDB`_ debugger that can be used for remote debugging of
 Python addons *in vivo*, that is, while running inside Kodi.
